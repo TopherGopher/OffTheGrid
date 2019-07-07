@@ -20,7 +20,7 @@ func TestGetPageWithChromeDP(t *testing.T) {
 	defer wd.Teardown()
 	err := wd.Init()
 	assert.NoError(err)
-	body, err := wd.GetPageBody("https://google.com")
+	body, err := wd.GetInnerHTMLOfElement("https://google.com", "body")
 	assert.NoError(err)
 	assert.GreaterOrEqual(len(body), 1000)
 }

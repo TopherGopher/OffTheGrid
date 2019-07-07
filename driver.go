@@ -50,7 +50,7 @@ func (wd *WebDriver) Init() (err error) {
 func (wd *WebDriver) Teardown() {
 	err := chromedp.Cancel(wd.chromeDpContext)
 	if err != nil {
-		panic("Could not cancel everything")
+		wd.log.Panicf("Could not cancel everything: %+v", err)
 	}
 }
 
@@ -81,14 +81,14 @@ func (wd *WebDriver) CreateChromeDPDriver() error {
 	return nil
 }
 
-// GetPageBody returns the raw HTML of a web page body using
+// GetInnerHTMLOfElement returns the raw HTML of a web element using
 // the chromedp driver. This is useful for forms with javascript
 // rendering.
-func (wd *WebDriver) GetPageBody(url string) (body string, err error) {
+func (wd *WebDriver) GetInnerHTMLOfElement(url string, elementName string) (body string, err error) {
 	err = chromedp.Run(wd.chromeDpContext,
 		chromedp.Navigate(url),
 		// chromedp.Text(`#pkg-overview`, &body, chromedp.NodeVisible, chromedp.ByID),
-		chromedp.InnerHTML("body", &body), //, chromedp.NodeVisible),
+		chromedp.InnerHTML(elementName, &body), //, chromedp.NodeVisible),
 	)
 	if err != nil {
 		wd.log.WithField("error", err).Error("Could not fetch page")
