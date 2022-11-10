@@ -10,7 +10,7 @@ import (
 	url_package "net/url"
 	"os"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 type CacheFileManager struct {

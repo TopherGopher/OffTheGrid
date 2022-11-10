@@ -10,7 +10,7 @@ func TestCreateWebDriver(t *testing.T) {
 	assert := assert.New(t)
 	wd := NewWebDriver()
 	defer wd.Teardown()
-	err := wd.Init()
+	err := wd.Init(true)
 	assert.NoError(err)
 }
 
@@ -18,9 +18,10 @@ func TestGetPageWithChromeDP(t *testing.T) {
 	assert := assert.New(t)
 	wd := NewWebDriver()
 	defer wd.Teardown()
-	err := wd.Init()
+	err := wd.Init(true)
 	assert.NoError(err)
-	body, err := wd.GetInnerHTMLOfElement("https://google.com", "body")
+	// TODO: Navigate to a page
+	body, err := wd.GetInnerHTMLOfElement("body")
 	assert.NoError(err)
 	assert.GreaterOrEqual(len(body), 1000)
 }
@@ -29,7 +30,7 @@ func TestGetPageWithHTTP(t *testing.T) {
 	assert := assert.New(t)
 	wd := NewWebDriver()
 	defer wd.Teardown()
-	err := wd.Init()
+	err := wd.Init(true)
 	assert.NoError(err)
 	body, err := wd.GetFullPageHTML("https://google.com")
 	assert.NoError(err)
@@ -41,7 +42,7 @@ func TestSiteHasChangedSinceLastPull(t *testing.T) {
 	wd := NewWebDriver()
 	defer wd.Teardown()
 	defer cleanupTestCache()
-	err := wd.Init()
+	err := wd.Init(true)
 	assert.NoError(err)
 	// The site isn't cached yet, so we should see that the site has
 	// changed.

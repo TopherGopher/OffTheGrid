@@ -1,6 +1,0 @@
-package offthegrid
-
-
-func main() {
-	
-}

@@ -14,6 +14,7 @@ type FormFields struct {
 	CellNumber           string
 	SocialSecurityNumber int
 	DriversLicenseNumber int
+	SubmitButtonXPath    string
 }
 
 // Person is a helper for holding metadata about an individual.
